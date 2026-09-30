@@ -11,7 +11,6 @@ import {
   Controller,
   useFieldArray,
   useForm,
-  type DefaultValues,
 } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
