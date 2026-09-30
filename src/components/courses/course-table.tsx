@@ -71,7 +71,7 @@ export function CourseTable() {
                 {course.notifyByEmail === true ? (
                   <Badge variant="default">รับ</Badge>
                 ):(
-                  <Badge variant="secondary">รับ</Badge>
+                  <Badge variant="secondary">ไม่รับ</Badge>
                 )}
               </TableCell>
               <TableCell>
