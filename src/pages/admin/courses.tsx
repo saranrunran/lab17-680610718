@@ -16,7 +16,6 @@ export default function AdminCoursesPage() {
         </div>
         <AddNewCourseDialog />
       </div>
-
       <CourseTable />
     </div>
   );

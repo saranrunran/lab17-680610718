@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import { useEnrollmentStore } from "@/lib/enrollment-store";
 
 export function CourseTable() {
@@ -20,7 +21,11 @@ export function CourseTable() {
           <TableRow>
             <TableHead>รหัสวิชา</TableHead>
             <TableHead>ชื่อวิชา</TableHead>
+            <TableHead>หลักสูตร</TableHead>
+            <TableHead>ภาคการศึกษา</TableHead>
+            <TableHead>รายละเอียด</TableHead>
             <TableHead>ผู้สอน</TableHead>
+            <TableHead>รับข่าวสารทางอีเมล</TableHead>
             <TableHead className="w-20">Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -40,11 +45,33 @@ export function CourseTable() {
               <TableCell>{course.courseId}</TableCell>
               <TableCell>{course.courseTitle}</TableCell>
               <TableCell>
-                {/* แสดงรายชื่อผู้สอนเป็นข้อความธรรมดา คั่นด้วย ", " */}
+                <Badge variant="outline" >{course.program}</Badge>
+              </TableCell>
+              <TableCell>ภาคการศึกษาที่ {course.semester}</TableCell>
+              <TableCell className="max-w-56 min-w-32 whitespace-normal text-muted-foreground">{course.description}</TableCell>
+              <TableCell>
                 {course.instructors.length === 0 ? (
                   <span className="text-muted-foreground">ยังไม่มีผู้สอน</span>
                 ) : (
-                  course.instructors.join(", ")
+                  <div className="flex flex-col gap-2">
+                    {course.instructors.map((instruc, index) => (
+                      <div key={instruc.email || index} className="text-sm">
+                        <div className="font-medium text-foreground">
+                          {instruc.name}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {instruc.email}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </TableCell>
+              <TableCell>
+                {course.notifyByEmail === true ? (
+                  <Badge variant="default">รับ</Badge>
+                ):(
+                  <Badge variant="secondary">รับ</Badge>
                 )}
               </TableCell>
               <TableCell>
